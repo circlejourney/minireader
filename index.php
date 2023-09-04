@@ -4,7 +4,7 @@
 
 <head>
     <title>
-        MiniReader <?php if ($storyID !== "") echo " || " . $storyData["title"]; ?>
+        MiniReader <?php if ($storyID !== "") echo " - " . $storyData["title"]; ?>
     </title>
     <meta name="description" content="A reading app for novels, novellas and short stories.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,84 +41,76 @@
 
 <body>
     <div id="container">
-        <?php
-
-        if (!$storyID) {
-            echo "<div id='main'>";
-            echo "<h1>MiniReader</h1>";
-            echo "<h2>Choose a story to read</h2>";
-            echo "<div class='story-index center'>";
-            foreach (preg_grep("/^[^\.]+$/", scandir("./")) as $path) {
-                if (is_dir($path) && file_exists($path . "/story.json")) {
-                    $thisStoryData = jsonFileToArray($path . "/story.json");
-                    echo "<p>";
-                    echo "<a href='?story={$thisStoryData["storyID"]}'>{$thisStoryData["title"]}</a>";
-                    if($thisStoryData["homepage"]) echo "|| <a href='{$thisStoryData["homepage"]}'>More info</a>";
-                    echo "</p>";
-                };
-            };
-            echo "</div>";
-            echo "</div>";
-            ob_start();
-        } else if (!$storyData) {
-            echo "<div class='center'>Story not found!</div>";
-            ob_start();
-        }
-
-        ?>
-
+        <?php if(!$storyID): ?>
+            <div id='main'>
+                <h1>MiniReader</h1>
+                <h2>Choose a story to read</h2>
+                <div class='story-index center'>
+                    <?php foreach (preg_grep("/^[^\.]+$/", scandir("./")) as $path): ?>
+                        <?php if (is_dir($path) && file_exists($path . "/story.json")): ?>
+                            <?php $thisStoryData = jsonFileToArray($path . "/story.json"); ?>
+                            <p>
+                                <a href='?story=<?php echo $thisStoryData["storyID"] ?>'>
+                                    <?php echo $thisStoryData["title"]?>
+                                </a>
+                                <?php if($thisStoryData["homepage"]): ?>
+                                    &bull; <a href='<?php echo $thisStoryData["homepage"]?>'>More info</a>
+                                <?php endif ?>
+                            </p>
+                        <?php endif ?>
+                    <?php endforeach ?>
+                </div>
+            </div>
+        <?php elseif(!$storyData): ?>
+            <div class='center'>Story not found!</div>
+        <?php else: ?>
         <div class="links">
             <a href="/read">All stories</a>
-            |
+            &bull;
             <?php
             if($storyData["homepage"]) {
-                echo "<a href='{$storyData["homepage"]}'>{$storyData["title"]} homepage</a> |";
+                echo "<a href='{$storyData["homepage"]}'>{$storyData["title"]} homepage</a> &bull;";
             }?>
             <a href="#" onclick="toggleDark()">Toggle black/white</a>
         </div>
-
-        <?php if (!$storyData || !$storyID) ob_end_clean(); ?>
+        <?php endif ?>
 
         <div id="main">
             <div class="nav-bar">
-                <?php
-                if ($lastCInt <= 1 || !$storyData || !$storyID) {
-                    ob_start();
-                }
-                ?>
-                <a class="nav-button first" <?php if ($thisCInt > 1) {
-                                                echo 'href="?story=' . $storyID . '&c=1"';
-                                            } ?>>
-                    First
-                </a>
-                <a class="nav-button prev" <?php if ($prevCInt > 0) {
-                                                echo 'href="?story=' . $storyID . '&c=' . strval($prevCInt) . '"';
-                                            } ?>>
-                    Previous
-                </a>
-                <a class="nav-button next" <?php if ($nextCInt <= $lastCInt) {
-                                                echo 'href="?story=' . $storyID . '&c=' . strval($nextCInt) . '"';
-                                            } ?>>
-                    Next
-                </a>
-                <a class="nav-button last" <?php if ($lastCInt != $thisCInt) {
-                                                echo 'href="?story=' . $storyID . '&c=' . strval($lastCInt) . '"';
-                                            } ?>>Last</a>
-                <a class="nav-button" href="?story=<?php echo $storyID; ?>&c=all">All chapters</a>
-                Go to:
-                <select class="chapselect" onchange="gotoURL(this)">
-                    <?php
-                    foreach ($storyData["chapters"] as $k => $chapter) {
-                        $chapterIndex = $k + 1;
-                        $selected = $thisCInt === $chapterIndex ? "selected" : "";
-                        echo "<option value='{$chapterIndex}' {$selected}>";
-                        echo $chapter["headline"];
-                        echo "</option>";
-                    }
-                    ?>
-                </select>
+                <?php if ($lastCInt > 1 && $storyData && $storyID && sizeof($chaptersReturned)): ?>
+                    <a class="nav-button first" <?php if ($thisCInt > 1) {
+                                                    echo 'href="?story=' . $storyID . '&c=1"';
+                                                } ?>>
+                        First
+                    </a>
+                    <a class="nav-button prev" <?php if ($prevCInt > 0) {
+                                                    echo 'href="?story=' . $storyID . '&c=' . strval($prevCInt) . '"';
+                                                } ?>>
+                        Previous
+                    </a>
+                    <a class="nav-button next" <?php if ($nextCInt <= $lastCInt) {
+                                                    echo 'href="?story=' . $storyID . '&c=' . strval($nextCInt) . '"';
+                                                } ?>>
+                        Next
+                    </a>
+                    <a class="nav-button last" <?php if ($lastCInt != $thisCInt) {
+                                                    echo 'href="?story=' . $storyID . '&c=' . strval($lastCInt) . '"';
+                                                } ?>>Last</a>
+                    <a class="nav-button" href="?story=<?php echo $storyID; ?>&c=all">All chapters</a>
+                    Go to:
+                    <select class="chapselect" onchange="gotoURL(this)">
+                        <?php foreach ($storyData["chapters"] as $k => $chapter): ?>
+                            <?php
+                                $chapterIndex = $k + 1;
+                                $selected = $thisCInt === $chapterIndex ? "selected" : "";
+                            ?>
+                            <option value='<?php echo $chapterIndex ?>' <?php echo $selected = $thisCInt === $chapterIndex ? "selected" : "" ?>>
+                                <?php echo $chapter["headline"]; ?>
+                            </option>
+                        <?php endforeach ?>
+                    </select>
 
-                <?php if ($lastCInt <= 1 || !$storyData || !$storyID)  ob_end_clean(); ?>
+                <?php endif ?>
             </div>
 
             <div class="story-container">

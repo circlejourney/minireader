@@ -108,6 +108,7 @@ a.nav-button:visited {
     padding: 10px;
     background-color: white;
     min-width: 50%;
+    flex-grow: 1;
 }
 
 #container.dark {

@@ -10,7 +10,7 @@
     
     if($storyData = jsonFileToArray( $storyID . $sep . "story.json" )) {
         
-        $thisCStr = $_GET["c"] || "1";
+        $thisCStr = $_GET["c"] ? $_GET["c"] : "1";
         if(!$storyData['chapterNomenclature']) $storyData['chapterNomenclature'] = "Chapter";
         $storyIsEnumerated = ($storyData["enumerated"] || !isset($storyData["enumerated"]));
         $lastCInt = count( $storyData["chapters"] );
@@ -23,10 +23,6 @@
                 $storyData["chapters"][$k]["headline"] = $storyData['chapterNomenclature'] . " " . $chapterEnumerator . ": " . $chapter["title"];
                 $chapterEnumerator++;
             } else $storyData["chapters"][$k]["headline"] = $chapter["title"];
-
-            $selectedProperty = $thisCInt === $chapterNumber ? "selected" : "";
-            $chapterIndex = $k+1;
-
         }
         
         if($thisCStr == "all") {
