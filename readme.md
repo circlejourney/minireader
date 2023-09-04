@@ -1,5 +1,5 @@
-# MiniReader: A minimal(ish) templater for self-publishing literature.
-A templater for self-publishing a collection of stories. It generates a listing of all stories in the gallery that can be viewed at the reader's homepage. It supports single-chaptered and multi-chaptered works, as well as alternate chapter naming (e.g. naming chapters as "Episodes").
+# MiniReader: A minimal(ish) templater for self-publishing a collection of stories.
+A PHP templater for self-publishing a collection of stories. It generates a listing of all stories in the gallery that can be viewed at the reader's homepage. It supports single-chaptered and multi-chaptered works, as well as alternate chapter naming (e.g. naming chapters as "Episodes").
 
 The entire MiniReader directory can be uploaded as-is to a web host and it should run out of the box. Two examples are included to demonstrate folder and `story.json` structure. A live example can be viewed at [circlejourney.net/read](https://circlejourney.net/read).
 
