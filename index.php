@@ -4,7 +4,7 @@
 
 <head>
     <title>
-        MiniReader <?php if ($storyID !== "") echo " - " . $storyData["title"]; ?>
+        MiniReader <?php if ($storyData) echo " - " . $storyData["title"]; ?>
     </title>
     <meta name="description" content="A reading app for novels, novellas and short stories.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -61,9 +61,8 @@
                     <?php endforeach ?>
                 </div>
             </div>
-        <?php elseif(!$storyData): ?>
-            <div class='center'>Story not found!</div>
-        <?php else: ?>
+        <?php endif ?>
+        
         <div class="links">
             <a href="/read">All stories</a>
             &bull;
@@ -73,8 +72,7 @@
             }?>
             <a href="#" onclick="toggleDark()">Toggle black/white</a>
         </div>
-        <?php endif ?>
-
+        
         <div id="main">
             <div class="nav-bar">
                 <?php if ($lastCInt > 1 && $storyData && $storyID && sizeof($chaptersReturned)): ?>
@@ -114,26 +112,24 @@
             </div>
 
             <div class="story-container">
-                <?php
-                if (count($chaptersReturned)) {
-                    $chapter_exists = true;
-                    echo "<h1>{$storyData["title"]}</h1>";
-                    foreach ($chaptersReturned as $chapternumber => $content) {
-                        echo $content;
-                        echo "<hr>";
-                    }
-                } else {
-                    echo "Chapter doesn't exist!";
-                }
-                ?>
+                <?php if(!$storyData): ?>
+                    <div class='center'>Story not found!</div>
+                <?php elseif(count($chaptersReturned)): ?>
+                    <?php $chapter_exists = true; ?>
+                    <h1><?php echo $storyData["title"] ?></h1>
+                    <?php foreach ($chaptersReturned as $chapternumber => $content): ?>
+                        <?php echo $content ?>
+                        <hr>
+                    <?php endforeach ?>
+                <?php else: ?>
+                    <div class='center'>Chapter doesn't exist!</div>
+                <?php endif?>
             </div>
 
-            <?php if (!$chapter_exists) ob_start(); ?>
+            <?php if ($chapter_exists): ?>
 
             <hr>
-
             <div id="disqus_thread"></div>
-
             <script>
                 var disqus_config = function() {
                     this.page.url = location.href;
@@ -152,9 +148,10 @@
             <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
             <script id="dsq-count-scr" src="#DISQUS-SCRIPT" async></script>
 
-            <?php if (!$chapter_exists) ob_end_clean(); ?>
+            <?php endif ?>
+            
         </div>
-        <?php if (!$storyData) ob_end_clean(); ?>
+
     </div>
 
     </div>
