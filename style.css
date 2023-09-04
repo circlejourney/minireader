@@ -1,0 +1,145 @@
+
+body {
+    color: #333;
+    font-family: "Droid Sans", sans-serif;
+    background-color: #111;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+blockquote {
+    background-color: #eee;
+    border-left: 0.4em solid grey;
+    padding: 0 0.4em;
+}
+
+h1,
+h2,
+.center {
+    text-align: center;
+}
+
+h1,
+h2 {
+    font-family: "Old Standard TT", serif;
+}
+
+@media only print {
+    h2 {
+        page-break-before: always;
+    }
+
+    h2:nth-of-type(1) {
+        page-break-before: auto;
+    }
+}
+
+hr {
+    border-color: #ddd;
+}
+
+@media only screen {
+    #container {
+        max-width: 900px;
+    }
+}
+
+a:not(.nav-button) {
+    color: #888;
+}
+
+p {
+    font-size: 14pt;
+    line-height: 1.6em;
+    page-break-inside: avoid;
+}
+
+h1 {
+    font-size: 32pt;
+}
+
+h2 {
+    font-size: 20pt;
+}
+
+.nav-bar {
+    text-align: center;
+    line-height: 3em;
+    margin-bottom: 1.15em;
+}
+
+@media only print {
+
+    .links,
+    .nav-bar {
+        display: none;
+    }
+}
+
+a.nav-button {
+    background-color: #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 0.5rem;
+}
+
+a.nav-button:link,
+a.nav-button:active,
+a.nav-button:visited {
+    color: white;
+    background-color: grey;
+}
+
+.chapselect {
+    padding: 10px;
+}
+
+.links {
+    text-align: center;
+}
+
+#container {
+    position: relative;
+    margin: 0px auto;
+    padding: 10px;
+    background-color: white;
+    min-width: 50%;
+}
+
+#container.dark {
+    background-color: #111;
+    color: #eee;
+}
+
+#container.dark a.nav-button {
+    color: black;
+}
+
+#main {
+    margin: 3% 10%;
+    text-align: left;
+}
+
+@media only print {
+    #main {
+        margin: 0;
+    }
+}
+
+@media all {
+    .page-break {
+        page-break-before: always;
+        margin-top: 128px;
+    }
+}
+
+@media print {
+    .page-break {
+        display: block;
+        page-break-before: always;
+    }
+}

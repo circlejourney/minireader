@@ -1,0 +1,23 @@
+{
+    "title": "Multi-Chapter Example",
+    "storyID": "multi-chapter-example",
+    "homepage": "https://circlejourney.net/offshore",
+    "chapterNomenclature": "Episode",
+    "enumerated": true,
+    "chapters": [
+        {
+            "title": "Prologue",
+            "enumerated": false
+        },
+        {
+            "title": "The Story Begins"
+        },
+        {
+            "title": "The Story Continues"
+        },
+        {
+            "title": "Epilogue",
+            "enumerated": false
+        }
+    ]
+}

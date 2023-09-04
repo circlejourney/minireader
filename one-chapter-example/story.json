@@ -1,0 +1,11 @@
+{
+    "title": "One Chapter Example",
+    "storyID": "one-chapter-example",
+    "chapterNomenclature": "Story",
+    "enumerated": false,
+    "chapters": [
+        {
+            "title": ""
+        }
+    ]
+}
