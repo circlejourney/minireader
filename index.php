@@ -112,7 +112,7 @@
             </div>
 
             <div class="story-container">
-                <?php if(!$storyData): ?>
+                <?php if($_GET["story"] && !$storyData): ?>
                     <div class='center'>Story not found!</div>
                 <?php elseif(count($chaptersReturned)): ?>
                     <?php $chapter_exists = true; ?>
