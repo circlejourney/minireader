@@ -28,6 +28,11 @@ h2 {
     font-family: "Old Standard TT", serif;
 }
 
+img {
+    max-width: 100%;
+    height: auto !important;
+}
+
 @media only print {
     h2 {
         page-break-before: always;
