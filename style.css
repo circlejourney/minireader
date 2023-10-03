@@ -28,9 +28,9 @@ h2 {
     font-family: "Old Standard TT", serif;
 }
 
-img {
+img, iframe {
     max-width: 100%;
-    height: auto !important;
+    height: auto;
 }
 
 @media only print {
