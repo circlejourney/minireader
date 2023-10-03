@@ -4,9 +4,9 @@ A PHP templater for self-publishing a collection of stories. It generates a list
 The entire MiniReader directory can be uploaded as-is to a web host and it should run out of the box. Two examples are included to demonstrate folder and `story.json` structure. A live example can be viewed at [circlejourney.net/read](https://circlejourney.net/read).
 
 # Quick start
-To add a story to the collection, add a sub-folder with a unique name with no spaces, then upload the contents of individual chapters (without titles) as numbered HTML files, e.g. `1.html`, `2.html`, `3.html`... Finally, upload a `story.json` file (details on how to format it are below).
+To add a story to the collection, add a sub-folder with a unique name with no spaces. To this folder, upload the contents of individual chapters (without titles) as numbered HTML files, e.g. `1.html`, `2.html`, `3.html`... Finally, upload a `story.json` file to the same folder (details on how to format it are below).
 
-To view a preview, install [XAMPP](https://www.apachefriends.org/) and add the `php` sub-directory from the install folder to your PATH variable. After that, start a PHP server by running the command `php -S localhost:8000` inside the MiniReader directory, and you can view the MiniReader at localhost:8000.
+To view a preview, install [XAMPP](https://www.apachefriends.org/) and add the `php` sub-directory from the install folder to your PATH variable. After that, start a PHP server by running the command `php -S localhost:8000` inside the MiniReader directory, and you can view the MiniReader inside your browser at the URL `localhost:8000`.
 
 # Files
 `index.php` is the reader. Add a search query i.e. `?story=<story-ID>&c=<chapter-number>` to the URL to fetch specific stories and chapters.
