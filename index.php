@@ -131,8 +131,9 @@
             <hr>
             <div id="disqus_thread"></div>
             <script>
+                 // The code below is an example. Get the embed code from Disqus' website and paste it here.
                 var disqus_config = function() {
-                    this.page.url = location.href;
+                    this.page.url = location.host + location.pathname;
                     this.page.identifier = "<?php echo $_GET["story"] . $_GET["c"]; ?>"
                 };
 
