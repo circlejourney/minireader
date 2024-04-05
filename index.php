@@ -4,8 +4,11 @@
 
 <head>
     <title>
-        MiniReader <?php if ($storyData) echo " - " . $storyData["title"]; ?>
-    </title>
+        MiniReader<?php
+        if($storyData) echo " - " . $storyData["title"];
+        if(isset($thisChapter["headline"])) echo ": " . $thisChapter["headline"];
+        if($storyIsEnumerated && isset($thisCStr)) echo $thisCStr;
+    ?></title>
     <meta name="description" content="A reading app for novels, novellas and short stories.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 

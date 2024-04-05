@@ -10,7 +10,7 @@
     
     if($storyData = jsonFileToArray( $storyID . $sep . "story.json" )) {
         
-        $thisCStr = $_GET["c"] ? $_GET["c"] : "1";
+        $thisCStr = isset($_GET["c"]) ? $_GET["c"] : "1";
         if(!$storyData['chapterNomenclature']) $storyData['chapterNomenclature'] = "Chapter";
         $storyIsEnumerated = ($storyData["enumerated"] || !isset($storyData["enumerated"]));
         $lastCInt = count( $storyData["chapters"] );
@@ -35,9 +35,10 @@
             $thisCInt = intval($thisCStr);
             $prevCInt = $thisCInt - 1;
             $nextCInt = $thisCInt + 1;
+            $thisChapter = $storyData["chapters"][$thisCInt-1];
             
             if($thisCHTML = file_get_contents($storyID . $sep . $thisCInt . ".html")) {
-                $chaptersReturned[$thisCInt] = "<h2>{$storyData["chapters"][$thisCInt-1]["headline"]}</h2>" . $thisCHTML;
+                $chaptersReturned[$thisCInt] = "<h2>{$thisChapter["headline"]}</h2>" . $thisCHTML;
             }
 
             $chapterEnumerator = 1;
